@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "370968140629",
+    "project_id": "react-crud-22928",
+    "storage_bucket": "react-crud-22928.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370968140629:android:70e744ca1933f9a1f82ddc",
+        "android_client_info": {
+          "package_name": "com.example.learning_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370968140629-dkq7d9fg15lgq9gk24feej6cqshbojpm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuMPWmoJG4Q03LoKtCCAlitSYP8VasYL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370968140629-dkq7d9fg15lgq9gk24feej6cqshbojpm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
