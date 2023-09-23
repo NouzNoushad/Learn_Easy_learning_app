@@ -40,22 +40,12 @@ class ModuleInfo extends StatelessWidget {
                   ),
                 ]),
           ),
-          Row(
-            children: [
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.share,
-                    color: ColorPicker.primaryColor,
-                  )),
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.download,
-                    color: ColorPicker.primaryColor,
-                  ))
-            ],
-          )
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.download,
+                color: ColorPicker.primaryColor,
+              ))
         ],
       ),
     );

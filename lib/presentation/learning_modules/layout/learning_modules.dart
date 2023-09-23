@@ -18,7 +18,7 @@ class _LearningModulesState extends State<LearningModules> {
   void initState() {
     context
         .read<VideoBloc>()
-        .add(VideoLoadedEvent(widget.chapter['videos'].first['videoLink']));
+        .add(VideoLoadedEvent(widget.chapter['videos'].first['videoLink'], 0));
     super.initState();
   }
 
@@ -49,13 +49,29 @@ class _LearningModulesState extends State<LearningModules> {
                           );
                         }),
                     Positioned(
-                        child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: ColorPicker.backgroundColor,
+                        child: Material(
+                      color: Colors.white24,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back,
+                              color: ColorPicker.backgroundColor,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            widget.chapter['videos'][state.selectedIndex]
+                                ['videoName'],
+                            style: const TextStyle(
+                                color: ColorPicker.backgroundColor),
+                          ),
+                        ],
                       ),
                     ))
                   ],
@@ -66,6 +82,7 @@ class _LearningModulesState extends State<LearningModules> {
                 Expanded(
                   child: ModuleVideoList(
                     chapter: widget.chapter,
+                    selectedIndex: state.selectedIndex,
                   ),
                 )
               ]),

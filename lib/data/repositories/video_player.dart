@@ -7,6 +7,7 @@ class VideoPlayerRepository {
   ChewieController? chewieController;
   Future<void>? initializeVideoPlayerFuture;
   late Widget playerWidget;
+  int selectedIndex = 0;
 
   initPlayer(String videoUrl) {
     videoPlayerController?.pause();

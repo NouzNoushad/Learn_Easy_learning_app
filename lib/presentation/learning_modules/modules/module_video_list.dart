@@ -6,7 +6,9 @@ import '../../../utils/colors.dart';
 
 class ModuleVideoList extends StatelessWidget {
   final Map chapter;
-  const ModuleVideoList({super.key, required this.chapter});
+  final int selectedIndex;
+  const ModuleVideoList(
+      {super.key, required this.chapter, required this.selectedIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,14 @@ class ModuleVideoList extends StatelessWidget {
             onTap: () {
               context
                   .read<VideoBloc>()
-                  .add(VideoLoadedEvent(video['videoLink']));
+                  .add(VideoLoadedEvent(video['videoLink'], index));
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               decoration: BoxDecoration(
+                  color: selectedIndex == index
+                      ? ColorPicker.primaryColor
+                      : ColorPicker.backgroundColor,
                   borderRadius: BorderRadius.circular(10),
                   border:
                       Border.all(width: 1.5, color: ColorPicker.primaryColor)),
@@ -36,12 +41,20 @@ class ModuleVideoList extends StatelessWidget {
                   children: [
                     Text(
                       video['videoName'],
+                      style: TextStyle(
+                          color: selectedIndex == index
+                              ? ColorPicker.backgroundColor
+                              : ColorPicker.primaryDarkColor),
                     ),
-                    const CircleAvatar(
-                      backgroundColor: ColorPicker.primaryColor,
+                    CircleAvatar(
+                      backgroundColor: selectedIndex == index
+                          ? ColorPicker.backgroundColor
+                          : ColorPicker.primaryColor,
                       child: Icon(
                         Icons.play_arrow,
-                        color: ColorPicker.backgroundColor,
+                        color: selectedIndex == index
+                            ? ColorPicker.primaryColor
+                            : ColorPicker.backgroundColor,
                       ),
                     ),
                   ]),
