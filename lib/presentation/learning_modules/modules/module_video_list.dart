@@ -7,9 +7,9 @@ import '../../../utils/colors.dart';
 class ModuleVideoList extends StatelessWidget {
   final Map chapter;
   final int selectedIndex;
+  
   const ModuleVideoList(
       {super.key, required this.chapter, required this.selectedIndex});
-
   @override
   Widget build(BuildContext context) {
     return ListView.separated(

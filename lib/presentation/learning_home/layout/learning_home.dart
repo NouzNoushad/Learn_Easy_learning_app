@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/data/repositories/course_repository.dart';
 import 'package:learning_app/presentation/learning_home/modules/banner.dart';
 import 'package:learning_app/presentation/learning_home/modules/chapter_content.dart';
+import 'package:learning_app/routes/routes_constant.dart';
 import 'package:learning_app/utils/colors.dart';
 
 class LearningHomeScreen extends StatefulWidget {
@@ -22,6 +23,13 @@ class _LearningHomeScreenState extends State<LearningHomeScreen> {
           'Learn Easy',
         ),
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed(RouteConstant.login);
+              },
+              icon: const Icon(Icons.power_settings_new))
+        ],
         elevation: 0,
       ),
       body: StreamBuilder(
