@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning_app/data/blocs/video_bloc/video_bloc.dart';
 import 'package:learning_app/presentation/learning_modules/modules/module_info.dart';
 import 'package:learning_app/presentation/learning_modules/modules/module_video_list.dart';
 import 'package:learning_app/utils/colors.dart';
+
+import '../../../utils/constant.dart';
 
 class LearningModules extends StatefulWidget {
   final Map chapter;
@@ -18,7 +22,7 @@ class _LearningModulesState extends State<LearningModules> {
   void initState() {
     context
         .read<VideoBloc>()
-        .add(VideoLoadedEvent(widget.chapter['videos'].first['videoLink'], 0));
+        .add(VideoLoadedEvent(widget.chapter['videos'].first['videoLink'],widget.chapter['videos'].first['videoName'], 0));
     super.initState();
   }
 
@@ -36,6 +40,9 @@ class _LearningModulesState extends State<LearningModules> {
                     FutureBuilder(
                         future: state.initializeVideoPlayerFuture,
                         builder: (context, snapshot) {
+                          bool isFileExists = File(downloadFilePath(
+                                  widget.chapter['videos'][state.selectedIndex]
+                                      ['videoName'])).existsSync();
                           if (snapshot.connectionState ==
                               ConnectionState.done) {
                             return AspectRatio(
@@ -78,6 +85,7 @@ class _LearningModulesState extends State<LearningModules> {
                 ),
                 ModuleInfo(
                   chapter: widget.chapter,
+                  selectedIndex: state.selectedIndex,
                 ),
                 Expanded(
                   child: ModuleVideoList(

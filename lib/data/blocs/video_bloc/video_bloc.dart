@@ -19,7 +19,7 @@ class VideoBloc extends Bloc<VideoEvent, VideoState> {
   FutureOr<void> initializePlayer(
       VideoLoadedEvent event, Emitter<VideoState> emit) async {
     try {
-      await videoPlayerRepository.initPlayer(event.videoUrl);
+      await videoPlayerRepository.initPlayer(event.videoUrl, event.videoName);
       emit(VideoLoadedState(
           videoPlayerRepository.initializeVideoPlayerFuture, videoPlayerRepository.playerWidget, event.selectedIndex));
     } catch (error) {

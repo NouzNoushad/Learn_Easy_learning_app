@@ -25,7 +25,7 @@ class ModuleVideoList extends StatelessWidget {
             onTap: () {
               context
                   .read<VideoBloc>()
-                  .add(VideoLoadedEvent(video['videoLink'], index));
+                  .add(VideoLoadedEvent(video['videoLink'],video['videoName'], index));
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

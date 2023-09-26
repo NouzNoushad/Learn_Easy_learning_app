@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../utils/constant.dart';
 
 class VideoPlayerRepository {
   VideoPlayerController? videoPlayerController;
@@ -9,15 +13,20 @@ class VideoPlayerRepository {
   late Widget playerWidget;
   int selectedIndex = 0;
 
-  initPlayer(String videoUrl) {
+  initPlayer(String videoUrl, String videoName) {
     videoPlayerController?.pause();
     chewieController?.pause();
     videoPlayerController?.dispose();
     chewieController?.dispose();
-    debugPrint('//////////// videoUrl: $videoUrl');
-    videoPlayerController =
-        VideoPlayerController.networkUrl(Uri.parse(videoUrl));
 
+    bool isFileExists = File(downloadFilePath(videoName)).existsSync();
+    debugPrint(
+        '//////////// videoUrl: $videoUrl, exists: $isFileExists, path: ${downloadFilePath(videoName)}');
+    videoPlayerController = isFileExists
+        ? VideoPlayerController.file(downloadFilePath(videoName))
+        : VideoPlayerController.networkUrl(Uri.parse(videoUrl));
+    // videoPlayerController =
+    //     VideoPlayerController.file(downloadFilePath(videoName));
     initializeVideoPlayerFuture =
         videoPlayerController?.initialize().then((value) {});
     chewieController = ChewieController(
@@ -34,3 +43,5 @@ class VideoPlayerRepository {
     );
   }
 }
+
+// /data/user/0/com.example.learning_app/app_flutter/my/directory/video_English_speaking

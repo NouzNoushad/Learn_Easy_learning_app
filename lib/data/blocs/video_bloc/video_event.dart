@@ -9,9 +9,10 @@ sealed class VideoEvent extends Equatable {
 
 class VideoLoadedEvent extends VideoEvent {
   final String videoUrl;
+  final String videoName;
   final int selectedIndex;
-  const VideoLoadedEvent(this.videoUrl, this.selectedIndex);
+  const VideoLoadedEvent(this.videoUrl, this.videoName, this.selectedIndex);
 
   @override
-  List<Object> get props => [videoUrl, selectedIndex];
+  List<Object> get props => [videoUrl,videoName, selectedIndex];
 }

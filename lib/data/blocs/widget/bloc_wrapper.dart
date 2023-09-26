@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning_app/data/blocs/auth_bloc/auth_bloc.dart';
 import 'package:learning_app/data/blocs/banner_cubit/banner_cubit.dart';
+import 'package:learning_app/data/blocs/download_bloc/download_bloc.dart';
 import 'package:learning_app/data/repositories/auth_repository.dart';
+import 'package:learning_app/data/repositories/download_repository.dart';
 
 import '../../repositories/video_player.dart';
 import '../video_bloc/video_bloc.dart';
@@ -21,6 +23,9 @@ class BlocWidget extends StatelessWidget {
         RepositoryProvider(
           create: (context) => AuthRepository(),
         ),
+        RepositoryProvider(
+          create: (context) => DownloadRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -36,6 +41,10 @@ class BlocWidget extends StatelessWidget {
             create: (context) => AuthBloc(
                 authRepository:
                     RepositoryProvider.of<AuthRepository>(context)),
+          ),
+          BlocProvider(
+            create: (context) => DownloadBloc(
+                downloadRepository: RepositoryProvider.of<DownloadRepository>(context)),
           ),
         ],
         child: child,
