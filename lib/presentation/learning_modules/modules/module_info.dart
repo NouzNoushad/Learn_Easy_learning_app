@@ -8,8 +8,12 @@ import 'package:learning_app/utils/constant.dart';
 class ModuleInfo extends StatelessWidget {
   final Map chapter;
   final int selectedIndex;
+  final bool isFileExists;
   const ModuleInfo(
-      {super.key, required this.chapter, required this.selectedIndex});
+      {super.key,
+      required this.chapter,
+      required this.selectedIndex,
+      required this.isFileExists});
 
   @override
   Widget build(BuildContext context) {
@@ -58,16 +62,21 @@ class ModuleInfo extends StatelessWidget {
               }
             },
             builder: (context, state) {
-              return IconButton(
-                  onPressed: () {
-                    var video = chapter['videos'][selectedIndex];
-                    context.read<DownloadBloc>().add(DownloadLoadedEvent(
-                        video['videoLink'], video['videoName']));
-                  },
-                  icon: const Icon(
-                    Icons.download,
-                    color: ColorPicker.primaryColor,
-                  ));
+              return ClipOval(
+                child: Material(
+                  color: ColorPicker.primaryColor,
+                  child: IconButton(
+                      onPressed: () {
+                        var video = chapter['videos'][selectedIndex];
+                        context.read<DownloadBloc>().add(DownloadLoadedEvent(
+                            video['videoLink'], video['videoName']));
+                      },
+                      icon: Icon(
+                        isFileExists ? Icons.play_arrow : Icons.download,
+                        color: ColorPicker.backgroundColor,
+                      )),
+                ),
+              );
             },
           )
         ],

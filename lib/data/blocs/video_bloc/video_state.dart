@@ -13,10 +13,12 @@ class VideoLoadedState extends VideoState {
   final Future<void>? initializeVideoPlayerFuture;
   final Widget playerWidget;
   final int selectedIndex;
-  const VideoLoadedState(this.initializeVideoPlayerFuture, this.playerWidget, this.selectedIndex);
+  final bool isFileExists;
+  const VideoLoadedState(
+      this.initializeVideoPlayerFuture, this.playerWidget, this.selectedIndex, this.isFileExists);
 
   @override
-  List<Object> get props => [playerWidget, selectedIndex];
+  List<Object> get props => [playerWidget, selectedIndex, isFileExists];
 }
 
 class VideoErrorState extends VideoState {

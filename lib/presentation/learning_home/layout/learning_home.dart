@@ -4,6 +4,8 @@ import 'package:learning_app/presentation/learning_home/modules/banner.dart';
 import 'package:learning_app/presentation/learning_home/modules/chapter_content.dart';
 import 'package:learning_app/routes/routes_constant.dart';
 import 'package:learning_app/utils/colors.dart';
+import 'package:learning_app/utils/constant.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LearningHomeScreen extends StatefulWidget {
   const LearningHomeScreen({super.key});
@@ -25,7 +27,11 @@ class _LearningHomeScreenState extends State<LearningHomeScreen> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-              onPressed: () {
+              onPressed: () async {
+                final SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+                sharedPreferences.remove(tokenName);
+                
                 Navigator.of(context).pushReplacementNamed(RouteConstant.login);
               },
               icon: const Icon(Icons.power_settings_new))

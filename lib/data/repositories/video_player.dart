@@ -12,6 +12,7 @@ class VideoPlayerRepository {
   Future<void>? initializeVideoPlayerFuture;
   late Widget playerWidget;
   int selectedIndex = 0;
+  bool isFileExists = false;
 
   initPlayer(String videoUrl, String videoName) {
     videoPlayerController?.pause();
@@ -19,14 +20,13 @@ class VideoPlayerRepository {
     videoPlayerController?.dispose();
     chewieController?.dispose();
 
-    bool isFileExists = File(downloadFilePath(videoName)).existsSync();
+    isFileExists = File(downloadFilePath(videoName)).existsSync();
     debugPrint(
         '//////////// videoUrl: $videoUrl, exists: $isFileExists, path: ${downloadFilePath(videoName)}');
     videoPlayerController = isFileExists
-        ? VideoPlayerController.file(downloadFilePath(videoName))
+        ? VideoPlayerController.file(File(downloadFilePath(videoName)))
         : VideoPlayerController.networkUrl(Uri.parse(videoUrl));
-    // videoPlayerController =
-    //     VideoPlayerController.file(downloadFilePath(videoName));
+
     initializeVideoPlayerFuture =
         videoPlayerController?.initialize().then((value) {});
     chewieController = ChewieController(
@@ -43,5 +43,3 @@ class VideoPlayerRepository {
     );
   }
 }
-
-// /data/user/0/com.example.learning_app/app_flutter/my/directory/video_English_speaking

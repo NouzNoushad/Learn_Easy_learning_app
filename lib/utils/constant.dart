@@ -10,6 +10,7 @@ enum DownloadStatus { success, failed, cancel, pause, resume, reset }
 
 const String dbName = 'courses';
 const String usersDbName = 'users';
+const String tokenName = 'email';
 
 downloadFilePath(String fileName) {
   return '/data/user/0/com.example.learning_app/app_flutter/my/directory/video_${fileName.changeVideoName}.mp4';

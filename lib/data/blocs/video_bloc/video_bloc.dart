@@ -21,7 +21,7 @@ class VideoBloc extends Bloc<VideoEvent, VideoState> {
     try {
       await videoPlayerRepository.initPlayer(event.videoUrl, event.videoName);
       emit(VideoLoadedState(
-          videoPlayerRepository.initializeVideoPlayerFuture, videoPlayerRepository.playerWidget, event.selectedIndex));
+          videoPlayerRepository.initializeVideoPlayerFuture, videoPlayerRepository.playerWidget, event.selectedIndex,  videoPlayerRepository.isFileExists));
     } catch (error) {
       emit(VideoErrorState(error.toString()));
     }

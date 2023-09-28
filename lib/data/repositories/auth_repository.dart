@@ -36,6 +36,7 @@ class AuthRepository {
             .set(userModelToMap(userModel))
             .then((value) async {
           signUpStatus = SignUpStatus.successful;
+          sharedPreferences.setString(tokenName, email);
         }).catchError((err) {
           signUpStatus = SignUpStatus.failed;
           debugPrint('Error occured: $err');
@@ -57,12 +58,14 @@ class AuthRepository {
 
   Future<LoginStatus> loginUser(email, password) async {
     try {
+      sharedPreferences = await SharedPreferences.getInstance();
       var response = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       print('============>>>>>>>>>>>>>>>>>>>>> signed in, $response');
       User? user = response.user;
       if (user != null) {
         loginStatus = LoginStatus.successful;
+        sharedPreferences.setString(tokenName, email);
       } else {
         loginStatus = LoginStatus.noUser;
       }
